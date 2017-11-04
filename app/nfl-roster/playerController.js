@@ -80,18 +80,33 @@ function PlayerController() {
 
     // PUBLIC
 
-    // GET PLAYERS BY SEARCH TYPE
+    // GET PLAYERS BY SEARCH TYPE (Not sure what I was thinking when I wrote these public.
+    // Not in use. leaving here in case it comes back to me.)
 
-    this.getPlayersByTeam = function getPlayersByTeam(teamName) {
-        return playerService.getPlayersByTeam(teamName)
+    this.renderByLastname = function renderByLastname(lastNameForm) {
+        console.log("Last name form: ", lastNameForm)
+        var choiceIndex = lastNameForm.searchByLastnameList.selectedIndex;
+        var choiceValue = lastNameForm.searchByLastnameList.options[choiceIndex].value;
+        var sortedChoices = playerService.getPlayersByLastName(choiceValue)
+        console.log(sortedChoices)
+        // START HERE, WRITE A FUNCTION THAT IS CALLED IN EACH OF THESE 3
+        // THAT WILL UPDATE THE SCREEN WITH THE SORTED ROSTER
     }
 
-    this.getPlayersByPosition = function getPlayersByPosition(position) {
-        return playerService.getPlayersByPosition(position)
+    this.renderByPosition = function renderByPosition(position) {
+        console.log("Position form: ", position)
+        var choiceIndex = position.searchByPositionList.selectedIndex;
+        var choiceValue = position.searchByPositionList.options[choiceIndex].value;
+        var sortedChoices = playerService.getPlayersByPosition(choiceValue)
+        console.log(sortedChoices)
     }
 
-    this.getPlayersByLastName = function getPlayersByLastName(lastName) {
-        return playerService.getPlayersByLastName(lastName)
+    this.renderByTeam = function renderByTeam(team) {
+        console.log("Team form: ", team)
+        var choiceIndex = team.searchByTeamList.selectedIndex;
+        var choiceValue = team.searchByTeamList.options[choiceIndex].value;
+        var sortedChoices = playerService.getPlayersByTeam(choiceValue)
+        console.log(sortedChoices)
     }
 
     // this.updateRosterDisplay = function updateRosterDisplay() {
