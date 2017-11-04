@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">My NFL Roster</div>
+            <div class="panel-body">
+                <div class="player-roster text-center">
+                    <div class="player-card">
+                        <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="Player image placeholder" id="player-image">
+                        <h4 class="player-name">Player Name</h4>
+                        <h6 class="player-position">Player Position</h6>
+                        <h6 class="player-team">Player Team</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">My Team</div>
+            <div class="panel-body">
+                <div class="my-team text-center">
+                    <div class="player-card">
+                        <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="Player image placeholder" id="player-image">
+                        <h4 class="player-name">Player Name</h4>
+                        <h6 class="player-position">Player Position</h6>
+                        <h6 class="player-team">Player Team</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">My Team</div>
+            <div class="panel-body">
+                <div class="search-area text-center">
+                    <button onclick="playerController.getPlayersByPosition('DL')">Sort by Position</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- EXTERNAL LIBRARIES -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- SERVICE -->
+    <script src="app/nfl-roster/playerService.js"></script>
+    <!-- CONTROLLER -->
+    <script src="app/nfl-roster/playerController.js"></script>
+    <!-- APP / INIT -->
+    <script src="app/init.js"></script>
+</body>
+
+</html>
