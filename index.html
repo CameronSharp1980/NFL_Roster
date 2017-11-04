@@ -16,7 +16,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">My NFL Roster</div>
             <div class="panel-body">
-                <div class="player-roster text-center">
+                <div class="player-roster row text-center">
                     <div class="player-card">
                         <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="Player image placeholder" id="player-image">
                         <h4 class="player-name">Player Name</h4>
@@ -43,7 +43,9 @@
             <div class="panel-heading">My Team</div>
             <div class="panel-body">
                 <div class="search-area text-center">
-                    <button onclick="playerController.getPlayersByPosition('DL')">Sort by Position</button>
+                    <button onclick="playerController.getSortedPlayers('lastname', 'Abdullah')">Sort by Last Name</button>
+                    <button onclick="playerController.getSortedPlayers('pro_team', 'SF')">Sort by Team</button>
+                    <button onclick="playerController.getSortedPlayers('position', 'RB')">Sort by Position</button>
                 </div>
             </div>
         </div>

@@ -59,5 +59,14 @@ function PlayerService(ready) {
             }
         });
     }
+
+    this.getSortedPlayers = function (field, sortBy){
+        console.log("Sorting By: " + field + "And " + sortBy)
+        return playersData.filter(function(player){
+            if (player[field] == sortBy) {
+               return true; 
+            }
+        });
+    }
 }
 

@@ -16,9 +16,31 @@ function PlayerController() {
     // });
     // console.log(playerService.getPlayersByTeam("SF"));
 
+    function updateRosterDisplay() {
+        var elem = document.getElementById('player-roster')
+        var template = ''
+
+    }
+
     // PUBLIC
-    this.getPlayersByPosition = function getPlayersByPosition(position) {
-        console.log(playerService.getPlayersByPosition(position))
+
+    // *** Re-wrote these three functions into one. These are no longer called. Keeping for reference.
+    // this.getPlayersByTeam = function getPlayersByTeam(teamName) {
+    //     return playerService.getPlayersByTeam(teamName)
+    // }
+
+    // this.getPlayersByPosition = function getPlayersByPosition(position) {
+    //     return playerService.getPlayersByPosition(position)
+    // }
+
+    // this.getPlayersByPosition = function getPlayersByPosition(lastName) {
+    //     return playerService.getPlayersByPosition(lastName)
+    // }
+    // ***
+
+    this.getSortedPlayers = function getSortedPlayers(field, sortBy){
+        // return playerService.getSortedPlayers(field, sortBy)
+        console.log(playerService.getSortedPlayers(field, sortBy));
     }
 
 }
