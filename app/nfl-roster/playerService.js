@@ -35,7 +35,44 @@ function PlayerService(ready) {
     console.log(playersData)
 
     // PUBLIC
-    
+
+    // GATHER FIELDS FOR EACH SEARCH DROPDOWN
+
+    this.getLastNames = function getLastNames(lastname){
+        var lastNames = {}
+        for (var key in playersData) {
+            if (playersData.hasOwnProperty(key)) {
+                var player = playersData[key];
+                lastNames[player[lastname]] = player[lastname]
+            }
+        }
+        return lastNames
+    }
+
+    this.getPositions = function getPositions(position){
+        var positions = {}
+        for (var key in playersData) {
+            if (playersData.hasOwnProperty(key)) {
+                var player = playersData[key];
+                positions[player[position]] = player[position];
+            }
+        }
+        return positions
+    }
+
+    this.getTeams = function getTeams(team){
+        var teams = {}
+        for (var key in playersData) {
+            if (playersData.hasOwnProperty(key)) {
+                var player = playersData[key];
+                teams[player[team]] = player[team];
+            }
+        }
+        return teams
+    }
+
+    //GET PLAYERS BY SEARCH SELECTION
+
     this.getPlayersByTeam = function (teamName) {
         return playersData.filter(function (player) {
             if (player.pro_team == teamName) {
@@ -43,8 +80,8 @@ function PlayerService(ready) {
             }
         });
     }
-    
-    this.getPlayersByPosition = function getPlayersByPosition (position) {
+
+    this.getPlayersByPosition = function getPlayersByPosition(position) {
         return playersData.filter(function (player) {
             if (player.position == position) {
                 return true;
@@ -52,19 +89,19 @@ function PlayerService(ready) {
         });
     }
 
-    this.getPlayersByName = function (lastName){
-        return playersData.filter(function(player){
+    this.getPlayersByLastName = function (lastName) {
+        return playersData.filter(function (player) {
             if (player.lastname == lastName) {
                 return true;
             }
         });
     }
 
-    this.getSortedPlayers = function (field, sortBy){
+    this.getSortedPlayers = function (field, sortBy) {
         console.log("Sorting By: " + field + "And " + sortBy)
-        return playersData.filter(function(player){
+        return playersData.filter(function (player) {
             if (player[field] == sortBy) {
-               return true; 
+                return true;
             }
         });
     }

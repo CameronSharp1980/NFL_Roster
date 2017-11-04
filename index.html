@@ -40,12 +40,27 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">My Team</div>
+            <div class="panel-heading">Search</div>
             <div class="panel-body">
                 <div class="search-area text-center">
-                    <button onclick="playerController.getSortedPlayers('lastname', 'Abdullah')">Sort by Last Name</button>
-                    <button onclick="playerController.getSortedPlayers('pro_team', 'SF')">Sort by Team</button>
-                    <button onclick="playerController.getSortedPlayers('position', 'RB')">Sort by Position</button>
+                    <!-- SEARCH BY NAME -->
+                    <form name="search-by-lastname-selector" action="">
+                        <select name="search-by-lastname-list" id="lastnames-list" onchange="playerController.renderSearchMenu(this.form)">
+                            <option value="lastnameVariable">Will populate with lastnames</option>
+                        </select>
+                    </form>
+                    <!-- SEARCH BY POSITION -->
+                    <form name="search-by-position-selector" action="">
+                        <select name="search-by-position-list" id="positions-list" onchange="playerController.renderSearchMenu(this.form)">
+                            <option value="positionVariable">Will populate with positions</option>
+                        </select>
+                    </form>
+                    <!-- SEARCH BY TEAM -->
+                    <form name="search-by-team-selector" action="">
+                        <select name="search-by-team-list" id="teams-list" onchange="playerController.renderSearchMenu(this.form)">
+                            <option value="teamVariable">Will populate with teams</option>
+                        </select>
+                    </form>
                 </div>
             </div>
         </div>
