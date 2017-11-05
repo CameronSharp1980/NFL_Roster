@@ -26,7 +26,7 @@ function PlayerController() {
     //---------------------------------------------------------
     function renderLastnamesDropdown() {
         var elem = document.getElementById('lastnames-list');
-        var template = '';
+        var template = '<option disabled selected value>Choose last name</option>'
         var lastNames = playerService.getLastNames('lastname')
         console.log("All Last Names: ", lastNames)
 
@@ -44,7 +44,7 @@ function PlayerController() {
 
     function renderPositionsDropdown() {
         var elem = document.getElementById('positions-list');
-        var template = '';
+        var template = '<option disabled selected value>Choose position</option>';
         var positions = playerService.getPositions('position')
         console.log("All Positions: ", positions)
 
@@ -62,7 +62,7 @@ function PlayerController() {
 
     function renderTeamsDropdown() {
         var elem = document.getElementById('teams-list');
-        var template = '';
+        var template = '<option disabled selected value>Choose team</option>'
         var teams = playerService.getTeams('pro_team')
         console.log("All Teams: ", teams)
         for (var key in teams) {
