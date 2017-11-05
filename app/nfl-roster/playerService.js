@@ -33,12 +33,14 @@ function PlayerService(ready) {
         });
     }
     loadPlayersData(); //call the function above every time we create a new service
-    console.log(playersData)
+    console.log("All player data: ", playersData)
 
     // PUBLIC
 
+    //---------------------------------------------------------
     // GATHER FIELDS FOR EACH SEARCH DROPDOWN
-
+    // CALLED BY YOUR RENDERxDROPDOWN FUNCTIONS
+    //---------------------------------------------------------
     this.getLastNames = function getLastNames(lastname) {
         var lastNames = {}
         for (var key in playersData) {
@@ -72,8 +74,10 @@ function PlayerService(ready) {
         return teams
     }
 
-    //GET PLAYERS BY SEARCH SELECTION
-
+    //---------------------------------------------------------
+    // GET PLAYERS BY SEARCH SELECTION
+    // EACH TAKES A SINGLE ARGUMENT AND PASSES BACK FILTERED RESULTS
+    //---------------------------------------------------------
     this.getPlayersByTeam = function (teamName) {
         return playersData.filter(function (player) {
             if (player.pro_team == teamName) {
@@ -91,7 +95,6 @@ function PlayerService(ready) {
     }
 
     this.getPlayersByLastName = function (lastName) {
-        console.log("lastname: ", lastName, typeof lastName)
         return playersData.filter(function (player) {
             if (player.lastname == lastName) {
                 return true;
@@ -109,12 +112,18 @@ function PlayerService(ready) {
         });
     }
 
-    this.addToRoster = function addToRoster(selectedPlayerId) {
+    //---------------------------------------------------------
+    // ADD TO AND REMOVE FROM ROSTER/TEAM FUNCTIONS
+    // ADD AND REMOVE FUNCTIONS USUALLY CALLED IN A PAIR SO AS
+    // TO ENSURE THE DATA IS NOT IN TWO PLACES AT ONCE
+    //---------------------------------------------------------
+
+    this.addToTeam = function addToTeam(selectedPlayerId) {
         for (var i = 0; i < playersData.length; i++) {
             var player = playersData[i];
             if (player.id == selectedPlayerId) {
                 myTeam.push(player)
-                console.log(myTeam);
+                console.log("My team: ", myTeam);
             }
         }
     }
@@ -125,6 +134,28 @@ function PlayerService(ready) {
                 playersData.splice(i, 1);
             }
         }
+    }
+
+    this.addToRoster = function addToRoster(selectedPlayerId){
+        for (var i = 0; i < myTeam.length; i++) {
+            var teamPlayer = myTeam[i];
+            if (teamPlayer.id == selectedPlayerId) {
+                playersData.push(teamPlayer);
+            }
+        }
+    }
+
+    this.removeFromTeam = function removeFromTeam(selectedPlayerId){
+        for (var i = 0; i < myTeam.length; i++) {
+            var teamPlayer = myTeam[i];
+            if (teamPlayer.id == selectedPlayerId) {
+                myTeam.splice(i, 1);
+            }
+        }
+    }
+
+    this.getCurrentTeam = function getCurrentTeam() {
+        return JSON.parse(JSON.stringify(myTeam))
     }
 }
 

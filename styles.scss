@@ -1,7 +1,21 @@
+body{
+    // height: 1000px;
+}
+.roster-body{
+    max-height: 500px;
+    overflow: auto;
+}
+.team-body{
+    max-height: 300px;
+    overflow: auto;
+}
 .search-field{
     display: inline-block;
 }
 .player-card{
     display: inline-block;
     border: 1px solid #000000;
+}
+.player-image{
+    width: 150px;
 }
