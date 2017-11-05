@@ -1,6 +1,7 @@
 function PlayerService(ready) {
     var endpointUri = "http://api.cbssports.com/fantasy/players/list?version=3.0&SPORT=football&response_format=json";
     var playersData = [];
+    var myTeam = [];
 
     // PRIVATE
 
@@ -38,7 +39,7 @@ function PlayerService(ready) {
 
     // GATHER FIELDS FOR EACH SEARCH DROPDOWN
 
-    this.getLastNames = function getLastNames(lastname){
+    this.getLastNames = function getLastNames(lastname) {
         var lastNames = {}
         for (var key in playersData) {
             if (playersData.hasOwnProperty(key)) {
@@ -49,7 +50,7 @@ function PlayerService(ready) {
         return lastNames
     }
 
-    this.getPositions = function getPositions(position){
+    this.getPositions = function getPositions(position) {
         var positions = {}
         for (var key in playersData) {
             if (playersData.hasOwnProperty(key)) {
@@ -60,7 +61,7 @@ function PlayerService(ready) {
         return positions
     }
 
-    this.getTeams = function getTeams(team){
+    this.getTeams = function getTeams(team) {
         var teams = {}
         for (var key in playersData) {
             if (playersData.hasOwnProperty(key)) {
@@ -90,6 +91,7 @@ function PlayerService(ready) {
     }
 
     this.getPlayersByLastName = function (lastName) {
+        console.log("lastname: ", lastName, typeof lastName)
         return playersData.filter(function (player) {
             if (player.lastname == lastName) {
                 return true;
@@ -105,6 +107,24 @@ function PlayerService(ready) {
                 return true;
             }
         });
+    }
+
+    this.addToRoster = function addToRoster(selectedPlayerId) {
+        for (var i = 0; i < playersData.length; i++) {
+            var player = playersData[i];
+            if (player.id == selectedPlayerId) {
+                myTeam.push(player)
+                console.log(myTeam);
+            }
+        }
+    }
+    this.removeFromRoster = function removeFromRoster(selectedPlayerId) {
+        for (var i = 0; i < playersData.length; i++) {
+            var player = playersData[i];
+            if (player.id == selectedPlayerId) {
+                playersData.splice(i, 1);
+            }
+        }
     }
 }
 

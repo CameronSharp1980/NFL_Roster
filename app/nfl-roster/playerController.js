@@ -1,6 +1,8 @@
 function PlayerController() {
     var loading = true; //Start the spinner
     var playerService = new PlayerService(ready);
+    var currentFilter = '';
+    var currentSelection = '';
     // PRIVATE
 
     function ready() {
@@ -81,12 +83,33 @@ function PlayerController() {
                           <h4 class="player-name">${filteredPlayer.fullname}</h4>
                           <h6 class="player-position">${filteredPlayer.position}</h6>
                           <h6 class="player-team">${filteredPlayer.pro_team}</h6>
+                          <button class="addButton" id="${filteredPlayer.id}" onclick="playerController.addToRoster(${filteredPlayer.id})">Add to team</button>
                      </div>
                 `
             }
         }
         elem.innerHTML = template;
 
+    }
+
+    function refreshTeamDisplay(currentFilter, currentSelection) {
+        switch (currentFilter) {
+            case 'lastname':
+                var tempPlayerList = playerService.getPlayersByLastName(currentSelection);
+                // console.log("current selection: ", currentSelection)
+                // console.log("current filter: ", currentFilter);
+                // console.log("temp player list: ", tempPlayerList)
+                updateRosterDisplay(tempPlayerList);
+                break;
+            case 'position':
+                var tempPlayerList = playerService.getPlayersByPosition(currentSelection);
+                updateRosterDisplay(tempPlayerList);
+                break;
+            case 'team':
+                var tempPlayerList = playerService.getPlayersByTeam(currentSelection);
+                updateRosterDisplay(tempPlayerList);
+                break;
+        }
     }
 
 
@@ -102,13 +125,16 @@ function PlayerController() {
     // Not in use. leaving here in case it comes back to me.)
 
     this.renderByLastname = function renderByLastname(lastNameForm) {
-        console.log("Last name form: ", lastNameForm)
+        // console.log("Last name form: ", lastNameForm)
         var choiceIndex = lastNameForm.searchByLastnameList.selectedIndex;
         var choiceValue = lastNameForm.searchByLastnameList.options[choiceIndex].value;
         var sortedChoices = playerService.getPlayersByLastName(choiceValue)
         console.log(sortedChoices)
         // START HERE, WRITE A FUNCTION THAT IS CALLED IN EACH OF THESE 3
         // THAT WILL UPDATE THE SCREEN WITH THE SORTED ROSTER
+        currentFilter = 'lastname';
+        currentSelection = choiceValue;
+        // console.log(currentFilter, currentSelection)
         updateRosterDisplay(sortedChoices);
     }
 
@@ -118,6 +144,8 @@ function PlayerController() {
         var choiceValue = position.searchByPositionList.options[choiceIndex].value;
         var sortedChoices = playerService.getPlayersByPosition(choiceValue)
         console.log(sortedChoices)
+        currentFilter = 'position';
+        currentSelection = choiceValue;
         updateRosterDisplay(sortedChoices);
     }
 
@@ -127,7 +155,15 @@ function PlayerController() {
         var choiceValue = team.searchByTeamList.options[choiceIndex].value;
         var sortedChoices = playerService.getPlayersByTeam(choiceValue)
         console.log(sortedChoices)
+        currentFilter = 'team';
+        currentSelection = choiceValue;
         updateRosterDisplay(sortedChoices);
+    }
+
+    this.addToRoster = function addToRoster(selectedPlayerId) {
+        playerService.addToRoster(selectedPlayerId);
+        playerService.removeFromRoster(selectedPlayerId);
+        refreshTeamDisplay(currentFilter, currentSelection);
     }
 
     // *** ATTEMPTED TO COMBINE SORT FUNCTION INTO ONE, FELL BACK TO SEPARATE, MAY REVISIT LATER
@@ -147,4 +183,3 @@ function PlayerController() {
     // }
 
 }
-
