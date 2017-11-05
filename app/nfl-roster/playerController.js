@@ -100,7 +100,7 @@ function PlayerController() {
                           <h4 class="player-name">${filteredPlayer.fullname}</h4>
                           <h6 class="player-position">${filteredPlayer.position}</h6>
                           <h6 class="player-team">${filteredPlayer.pro_team}</h6>
-                          <button class="addButton" id="${filteredPlayer.id}" onclick="playerController.addToTeam(${filteredPlayer.id})">Add to team</button>
+                          <button class="addButton btn btn-primary" id="${filteredPlayer.id}" onclick="playerController.addToTeam(${filteredPlayer.id})">Add to team</button>
                      </div>
                 `
             }
@@ -142,7 +142,7 @@ function PlayerController() {
                           <h4 class="player-name">${teamPlayer.fullname}</h4>
                           <h6 class="player-position">${teamPlayer.position}</h6>
                           <h6 class="player-team">${teamPlayer.pro_team}</h6>
-                          <button class="addButton" id="${teamPlayer.id}" onclick="playerController.removeFromTeam(${teamPlayer.id})">Remove from team</button>
+                          <button class="removeButton btn btn-primary"" id="${teamPlayer.id}" onclick="playerController.removeFromTeam(${teamPlayer.id})">Remove from team</button>
                      </div>
                 `
             }
@@ -212,7 +212,7 @@ function PlayerController() {
     //---------------------------------------------------------
 
     this.addToTeam = function addToTeam(selectedPlayerId) {
-        if (playerService.getCurrentTeam().length < 16) {
+        if (playerService.getCurrentTeam().length < 9) {
             // addToTeam RETURNS TRUE IF A PLAYER IS ADDED, FALSE IS NOT ADDED.
             // SO THE removeFromRoster FUNCTION IS PLACEDD INSIDE THE IF TO ENSURE
             // THAT THE REMOVAL HAPPENS ONLY IF A PLAYER IS ADDED
@@ -221,6 +221,8 @@ function PlayerController() {
             }
             refreshRosterDisplay(currentFilter, currentSelection);
             updateTeamDisplay();
+        }else{
+            alert("Team full");
         }
     }
 
