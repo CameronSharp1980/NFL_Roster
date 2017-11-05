@@ -97,6 +97,7 @@ function PlayerService(ready) {
         });
     }
 
+    // NOT CURRENTLY USING (Combined filter)
     this.getSortedPlayers = function (field, sortBy) {
         console.log("Sorting By: " + field + "And " + sortBy)
         return playersData.filter(function (player) {
