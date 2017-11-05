@@ -35,6 +35,17 @@ function PlayerService(ready) {
     loadPlayersData(); //call the function above every time we create a new service
     console.log("All player data: ", playersData)
 
+    function findPlayerById(playerArray, playerId) {
+        console.log("ID: ", playerId)
+        console.log(playerArray)
+        for (var i = 0; i < playerArray.length; i++) {
+            var player = playerArray[i];
+            if (player.id == playerId) {
+                return JSON.parse(JSON.stringify(player));
+            }
+        }
+    }
+
     // PUBLIC
 
     //---------------------------------------------------------
@@ -119,6 +130,20 @@ function PlayerService(ready) {
     //---------------------------------------------------------
 
     this.addToTeam = function addToTeam(selectedPlayerId) {
+        // FIND PLAYER BY ID SO YOU CAN CHECK myTeam ARRAY TO SEE
+        // IF YOU TEAM HAS THAT POSITION ALREADY.
+        var candidatePlayer = findPlayerById(playersData, selectedPlayerId);
+        // IF ARRAY IS EMPTY, NO POSITION WILL CHECK AS FILLED
+        // SO NO NEED TO CHECK FOR POSITIONS
+        if (myTeam.length != 0) {
+            for (var i = 0; i < myTeam.length; i++) {
+                var teamMember = myTeam[i];
+                if (candidatePlayer.position == teamMember.position) { //first time through the array is empty - account for this!
+                    alert("You already filled that position");
+                    return false // RETURN FALSE (PLAYER WAS NOT ADDED)
+                }
+            }
+        }
         for (var i = 0; i < playersData.length; i++) {
             var player = playersData[i];
             if (player.id == selectedPlayerId) {
@@ -126,6 +151,7 @@ function PlayerService(ready) {
                 console.log("My team: ", myTeam);
             }
         }
+        return true; // RETURN TRUE (PLAYER WAS ADDED)
     }
     this.removeFromRoster = function removeFromRoster(selectedPlayerId) {
         for (var i = 0; i < playersData.length; i++) {
@@ -136,7 +162,7 @@ function PlayerService(ready) {
         }
     }
 
-    this.addToRoster = function addToRoster(selectedPlayerId){
+    this.addToRoster = function addToRoster(selectedPlayerId) {
         for (var i = 0; i < myTeam.length; i++) {
             var teamPlayer = myTeam[i];
             if (teamPlayer.id == selectedPlayerId) {
@@ -145,7 +171,7 @@ function PlayerService(ready) {
         }
     }
 
-    this.removeFromTeam = function removeFromTeam(selectedPlayerId){
+    this.removeFromTeam = function removeFromTeam(selectedPlayerId) {
         for (var i = 0; i < myTeam.length; i++) {
             var teamPlayer = myTeam[i];
             if (teamPlayer.id == selectedPlayerId) {

@@ -213,8 +213,12 @@ function PlayerController() {
 
     this.addToTeam = function addToTeam(selectedPlayerId) {
         if (playerService.getCurrentTeam().length < 16) {
-            playerService.addToTeam(selectedPlayerId);
-            playerService.removeFromRoster(selectedPlayerId);
+            // addToTeam RETURNS TRUE IF A PLAYER IS ADDED, FALSE IS NOT ADDED.
+            // SO THE removeFromRoster FUNCTION IS PLACEDD INSIDE THE IF TO ENSURE
+            // THAT THE REMOVAL HAPPENS ONLY IF A PLAYER IS ADDED
+            if (playerService.addToTeam(selectedPlayerId)) {
+                playerService.removeFromRoster(selectedPlayerId);
+            }
             refreshRosterDisplay(currentFilter, currentSelection);
             updateTeamDisplay();
         }
